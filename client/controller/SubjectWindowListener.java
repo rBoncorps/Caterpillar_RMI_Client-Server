@@ -1,23 +1,15 @@
-package Client.Controller;
+package client.controller;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.rmi.RemoteException;
-
-import Client.ClientSubject;
-import Server.ServerForumInterface;
-import Server.SubjectInterface;
 
 public class SubjectWindowListener implements WindowListener {
 
-	private SubjectInterface subject;
-	private ClientSubject clientSubject;
+	private SubjectWindowControllerInterface subjectWindowController;
 	
-	public SubjectWindowListener(SubjectInterface subject, ClientSubject cliSub) {
-		this.subject = subject;
-		this.clientSubject = cliSub;
+	public SubjectWindowListener(SubjectWindowControllerInterface subjectWindowController) {
+		this.subjectWindowController = subjectWindowController;
 	}
-	
 	@Override
 	public void windowActivated(WindowEvent arg0) {
 		// TODO Auto-generated method stub
@@ -33,14 +25,7 @@ public class SubjectWindowListener implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent arg0) {
 		// TODO Auto-generated method stub
-		try {
-			System.out.println("la");
-			subject.unsubscribe(clientSubject);
-			
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			System.out.println("lksjslj");
-		}
+		this.subjectWindowController.unsubscribeClient();
 
 	}
 
