@@ -47,7 +47,7 @@ public class ServerForum extends UnicastRemoteObject implements
 		return null;
 	}
 	
-	public boolean checkPseudo(String name) throws RemoteException {
+	private boolean checkPseudo(String name) {
 		Iterator<String> it = loggedPseudos.iterator();
 		while(it.hasNext()) {
 			String tmp = it.next();
@@ -62,8 +62,12 @@ public class ServerForum extends UnicastRemoteObject implements
 		return chatName;
 	}
 	
-	public void addClient(String pseudo) throws RemoteException{
-		loggedPseudos.add(pseudo);
+	public boolean addClient(String pseudo) throws RemoteException {
+		boolean correctPseudo = checkPseudo(pseudo);
+		if(correctPseudo) {
+			loggedPseudos.add(pseudo);
+		}
+		return correctPseudo;
 	}
 	
 	public void removeClient(String pseudo) throws RemoteException{

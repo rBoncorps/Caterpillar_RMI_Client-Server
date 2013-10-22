@@ -32,11 +32,10 @@ public class ConfigWindowController implements ConfigWindowControllerInterface{
 					Naming.lookup(adr);
 			try {
 				/*
-				 * Check if the given pseudo is free on the server.
+				 * Try to add the client to the server.
 				 */
-				boolean pseudoOk = serverForum.checkPseudo(pseudo);
-				if(pseudoOk) {
-					serverForum.addClient(pseudo);
+				boolean clientAdded = serverForum.addClient(pseudo);
+				if(clientAdded) {
 					this.configWindow.setVisible(false);
 					ClientMainWindowInterface window = new ClientMainWindow(serverForum.getChatName());
 					MainWindowControllerInterface windowController = new MainWindowController(window, serverForum, pseudo);
