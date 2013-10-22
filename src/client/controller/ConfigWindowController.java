@@ -25,22 +25,25 @@ public class ConfigWindowController implements ConfigWindowControllerInterface{
 		String pseudo = this.configWindow.getPseudo();
 		
 		try {
-			//essai connection au serveur avant création
-			ServerForumInterface forumServer = (ServerForumInterface) 
+			/*
+			 * Try to connect to the server.
+			 */
+			ServerForumInterface serverForum = (ServerForumInterface) 
 					Naming.lookup(adr);
 			try {
-				//Verification que le pseudo n'est pas deja utilisé
-				boolean pseudoOK = forumServer.checkPseudo(pseudo);
-				System.out.println("pseudoOK : " + pseudoOK);
-				if (pseudoOK == false) {
-					JOptionPane.showMessageDialog((ClientConfigWindow)this.configWindow, pseudo + " : this pseudo is already in use");
+				/*
+				 * Check if the given pseudo is free on the server.
+				 */
+				boolean pseudoOk = serverForum.checkPseudo(pseudo);
+				if(pseudoOk) {
+					serverForum.addClient(pseudo);
+					this.configWindow.setVisible(false);
+					ClientMainWindowInterface window = new ClientMainWindow(serverForum.getChatName());
+					MainWindowControllerInterface windowController = new MainWindowController(window, serverForum, pseudo);
+					windowController.displaySubjectSelection();
 				}
 				else {
-					forumServer.addClient(pseudo);
-					this.configWindow.setVisible(false);
-					ClientMainWindowInterface window = new ClientMainWindow(forumServer.getChatName());
-					MainWindowControllerInterface windowController = new MainWindowController(window, forumServer, pseudo);
-					windowController.displaySubjectSelection();
+					JOptionPane.showMessageDialog((ClientConfigWindow)this.configWindow, pseudo + " : this pseudo is already in use");
 				}
 			} 
 			catch (RemoteException e) {
