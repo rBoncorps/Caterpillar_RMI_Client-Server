@@ -33,6 +33,7 @@ public class MainWindowController implements MainWindowControllerInterface {
 		catch(RemoteException e) {
 			this.clientMainWindow.displayError("Connection lost","Connection with the server was lost");
 		}
+		displaySubjectSelection();
 	}
 	
 	@Override

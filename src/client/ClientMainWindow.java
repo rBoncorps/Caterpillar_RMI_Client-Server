@@ -28,7 +28,7 @@ public class ClientMainWindow extends JFrame implements ClientMainWindowInterfac
 	public ClientMainWindow(String title) {
 		super(title);
 		
-		JPanel mainPanel = new JPanel();
+		mainPanel = new JPanel();
 		this.setContentPane(mainPanel);
 		GridBagLayout mainLayout = new GridBagLayout();
 		mainPanel.setLayout(mainLayout);
@@ -136,6 +136,7 @@ public class ClientMainWindow extends JFrame implements ClientMainWindowInterfac
 			    JOptionPane.ERROR_MESSAGE);
 	}
 	
+	private JPanel mainPanel;
 	private DefaultListModel subjectListModel;
 	private JList subjectJList;
 	private JTextField newSubjectField;
