@@ -6,7 +6,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
+import client.ClientConfigWindow;
+import client.ClientMainWindow;
 import client.ClientMainWindowInterface;
 import client.SubjectWindowInterface;
 import server.ServerForumInterface;
@@ -29,12 +32,18 @@ public class MainWindowController implements MainWindowControllerInterface {
 	public void addNewSubject() {
 		String newSubjectName = this.clientMainWindow.getNewSubjectField().getText();
 		try {
-			this.remoteServer.addSubject(newSubjectName);
+			boolean subjectCreated = this.remoteServer.addSubject(newSubjectName);
+			if(subjectCreated) {
+				displaySubjectSelection();
+			}
+			else {
+				clientMainWindow.displayError("Invalid forum name", "Forum " + newSubjectName + " already exists");
+			}
 		}
 		catch(RemoteException e) {
 			this.clientMainWindow.displayError("Connection lost","Connection with the server was lost");
 		}
-		displaySubjectSelection();
+		
 	}
 	
 	@Override

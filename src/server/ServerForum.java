@@ -67,10 +67,16 @@ public class ServerForum extends UnicastRemoteObject implements
 	}
 	
 	@Override
-	public void addSubject(String newSubjectName) throws RemoteException{
-		subjectNames.add(newSubjectName);
-		subjects.add(new Subject(newSubjectName));
-		System.out.println("Subject " + newSubjectName + " created");
+	public boolean addSubject(String newSubjectName) throws RemoteException {
+		if(subjectNames.contains(newSubjectName)) {
+			return false;
+		}
+		else {
+			subjectNames.add(newSubjectName);
+			subjects.add(new Subject(newSubjectName));
+			System.out.println("Subject " + newSubjectName + " created");
+			return true;
+		}
 	}
 	
 	private boolean checkPseudo(String name) {

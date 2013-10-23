@@ -14,7 +14,7 @@ public interface ServerForumInterface extends Remote {
 	public boolean addClient(String pseudo) throws RemoteException;
 	public void removeClient(String pseudo) throws RemoteException;
 	
-	public void addSubject(String newSubjectName) throws RemoteException;
+	public boolean addSubject(String newSubjectName) throws RemoteException;
 	
 	
 	

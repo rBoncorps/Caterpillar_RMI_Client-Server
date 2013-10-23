@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -72,24 +73,37 @@ public class ClientConfigWindow extends JFrame implements ClientConfigWindowInte
 		this.setLocationRelativeTo(null);
 	}
 
+	@Override
 	public String getServerAdresse() {
 		return adresseField.getText();
 	}
 
+	@Override
 	public String getPseudo() {
 		return pseudoField.getText();
 	}
 	
+	@Override
 	public JButton getConnectButton() {
 		return connectButton;
 	}
 	
+	@Override
 	public JButton getExitButton() {
 		return exitButton;
 	}
 	
+	@Override
 	public void setVisible(boolean isVisible) {
 		super.setVisible(isVisible);
+	}
+	
+	@Override
+	public void displayError(String title, String message) {
+		JOptionPane.showMessageDialog(this,
+			    message,
+			    title,
+			    JOptionPane.ERROR_MESSAGE);
 	}
 	
 	private JTextField adresseField;

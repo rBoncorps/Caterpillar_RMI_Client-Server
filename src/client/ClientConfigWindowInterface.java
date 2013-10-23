@@ -10,5 +10,6 @@ public interface ClientConfigWindowInterface {
 	public JButton getExitButton();
 	
 	public void setVisible(boolean isVisible);
+	public void displayError(String title, String message);
 
 }

@@ -11,7 +11,7 @@ import client.ClientMainWindow;
 import client.ClientMainWindowInterface;
 import server.ServerForumInterface;
 
-public class ConfigWindowController implements ConfigWindowControllerInterface{
+public class ConfigWindowController implements ConfigWindowControllerInterface {
 	
 	public ConfigWindowController(ClientConfigWindowInterface configWindow) {
 		this.configWindow = configWindow;
@@ -42,7 +42,7 @@ public class ConfigWindowController implements ConfigWindowControllerInterface{
 					windowController.displaySubjectSelection();
 				}
 				else {
-					JOptionPane.showMessageDialog((ClientConfigWindow)this.configWindow, pseudo + " : this pseudo is already in use");
+					configWindow.displayError("Invalid pseudo", "Pseudo " + pseudo + " is already in use");
 				}
 			} 
 			catch (RemoteException e) {
