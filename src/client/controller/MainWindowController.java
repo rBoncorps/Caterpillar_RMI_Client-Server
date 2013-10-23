@@ -25,6 +25,7 @@ public class MainWindowController implements MainWindowControllerInterface {
 		this.clientMainWindow.getUpdateSubjectListButton().addActionListener(new MainWindowUpdateSubjectButtonListener(this));
 	}
 	
+	@Override
 	public void addNewSubject() {
 		String newSubjectName = this.clientMainWindow.getNewSubjectField().getText();
 		try {
@@ -46,6 +47,7 @@ public class MainWindowController implements MainWindowControllerInterface {
 		}
 	}
 	
+	@Override
 	public void displaySelectedSubject() {
 		String subjectName = (String)this.clientMainWindow.getsubjectJList().getSelectedValue();
 		try {

@@ -47,6 +47,32 @@ public class ServerForum extends UnicastRemoteObject implements
 		return null;
 	}
 	
+	@Override
+	public String getChatName() throws RemoteException {
+		return chatName;
+	}
+	
+	@Override
+	public boolean addClient(String pseudo) throws RemoteException {
+		boolean correctPseudo = checkPseudo(pseudo);
+		if(correctPseudo) {
+			loggedPseudos.add(pseudo);
+		}
+		return correctPseudo;
+	}
+	
+	@Override
+	public void removeClient(String pseudo) throws RemoteException{
+		loggedPseudos.remove(pseudo);
+	}
+	
+	@Override
+	public void addSubject(String newSubjectName) throws RemoteException{
+		subjectNames.add(newSubjectName);
+		subjects.add(new Subject(newSubjectName));
+		System.out.println("Subject " + newSubjectName + " created");
+	}
+	
 	private boolean checkPseudo(String name) {
 		Iterator<String> it = loggedPseudos.iterator();
 		while(it.hasNext()) {
@@ -56,28 +82,6 @@ public class ServerForum extends UnicastRemoteObject implements
 			}
 		}
 		return true;
-	}
-	
-	public String getChatName() throws RemoteException {
-		return chatName;
-	}
-	
-	public boolean addClient(String pseudo) throws RemoteException {
-		boolean correctPseudo = checkPseudo(pseudo);
-		if(correctPseudo) {
-			loggedPseudos.add(pseudo);
-		}
-		return correctPseudo;
-	}
-	
-	public void removeClient(String pseudo) throws RemoteException{
-		loggedPseudos.remove(pseudo);
-	}
-	
-	public void addSubject(String newSubjectName) throws RemoteException{
-		subjectNames.add(newSubjectName);
-		subjects.add(new Subject(newSubjectName));
-		System.out.println(newSubjectName);
 	}
 	
 	private Collection<String> subjectNames;
