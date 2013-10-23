@@ -94,11 +94,6 @@ public class ClientConfigWindow extends JFrame implements ClientConfigWindowInte
 	}
 	
 	@Override
-	public void setVisible(boolean isVisible) {
-		super.setVisible(isVisible);
-	}
-	
-	@Override
 	public void displayError(String title, String message) {
 		JOptionPane.showMessageDialog(this,
 			    message,

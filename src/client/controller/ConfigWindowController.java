@@ -15,11 +15,14 @@ public class ConfigWindowController implements ConfigWindowControllerInterface {
 	
 	public ConfigWindowController(ClientConfigWindowInterface configWindow) {
 		this.configWindow = configWindow;
+		this.configWindow.setVisible(true);
+		
 		this.configWindow.getConnectButton().addActionListener(
 					new ConfigWindowConnectListener(this));
 		this.configWindow.getExitButton().addActionListener(new ConfigWindowExitListener());
 	}
 	
+	@Override
 	public void connectToServer() {
 		String adr = this.configWindow.getServerAdresse();
 		String pseudo = this.configWindow.getPseudo();
@@ -50,7 +53,7 @@ public class ConfigWindowController implements ConfigWindowControllerInterface {
 			}
 		} 
 		catch(Exception e){
-			JOptionPane.showMessageDialog((ClientConfigWindow)this.configWindow, "Server is not reachable");
+			configWindow.displayError("Server not reachable", "Server is not reachable");
 		}	
 	}
 

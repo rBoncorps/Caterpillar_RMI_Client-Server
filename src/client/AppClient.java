@@ -20,12 +20,6 @@ public class AppClient {
 		try {
 			ClientConfigWindowInterface configWin = new ClientConfigWindow("Tabernac Forum Client");
 			ConfigWindowController configController = new ConfigWindowController(configWin);
-			configWin.setVisible(true);
-			/*ServerForumInterface forumServer = (ServerForumInterface)
-			Naming.lookup("//localhost:8090/server");
-			ClientMainWindowInterface window = new ClientMainWindow("Tabarnac Forum Client");
-			MainWindowControllerInterface windowController = new MainWindowController(window, forumServer);
-			windowController.displaySubjectSelection();*/
 		} catch(Exception e){
 			System.out.println ("Forum server is not accessible, please try again later");
 		}

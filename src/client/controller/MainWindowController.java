@@ -19,6 +19,7 @@ public class MainWindowController implements MainWindowControllerInterface {
 	
 	public MainWindowController(ClientMainWindowInterface clientMainWindow, ServerForumInterface remoteServer, String pseudo) {
 		this.clientMainWindow = clientMainWindow;
+		this.clientMainWindow.setVisible(true);
 		this.remoteServer = remoteServer;
 		this.pseudo = pseudo;
 		this.displayedSubjects = new ArrayList<String>();
@@ -62,7 +63,7 @@ public class MainWindowController implements MainWindowControllerInterface {
 		try {
 			SubjectInterface remoteSubject = remoteServer.getSubject(subjectName);
 			SubjectWindowInterface subjectWindow = clientMainWindow.displaySubjectWindow(subjectName);
-			SubjectWindowControllerInterface subjectWindowController = new SubjectWindowController(subjectWindow, remoteSubject,pseudo);
+			SubjectWindowControllerInterface subjectWindowController = new SubjectWindowController(subjectWindow, remoteSubject, pseudo);
 			displayedSubjects.add(subjectName);
 		}catch(RemoteException e) {
 			clientMainWindow.displayError("Connection lost", "Connection with the server was lost");

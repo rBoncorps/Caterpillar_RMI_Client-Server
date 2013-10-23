@@ -88,7 +88,6 @@ public class ClientMainWindow extends JFrame implements ClientMainWindowInterfac
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(300,450));
 		this.setLocationRelativeTo(null);
-		this.setVisible(true);
 	}
 	
 	@Override
