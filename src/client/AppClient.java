@@ -1,13 +1,8 @@
 package client;
 
-import java.rmi.Naming;
-
 import javax.swing.UIManager;
 
 import client.controller.ConfigWindowController;
-import client.controller.MainWindowController;
-import client.controller.MainWindowControllerInterface;
-import server.ServerForumInterface;
 
 public class AppClient {
 
@@ -15,11 +10,10 @@ public class AppClient {
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 		}catch(Exception e) {
-			System.out.println("Style not found");
+			System.out.println("App style not found, launching with default style");
 		}
 		try {
-			ClientConfigWindowInterface configWin = new ClientConfigWindow("Tabernac Forum Client");
-			ConfigWindowController configController = new ConfigWindowController(configWin);
+			new ConfigWindowController();
 		} catch(Exception e){
 			System.out.println ("Forum server is not accessible, please try again later");
 		}

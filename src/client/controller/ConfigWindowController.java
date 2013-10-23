@@ -3,18 +3,16 @@ package client.controller;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 
-import javax.swing.JOptionPane;
-
+import server.ServerForumInterface;
 import client.ClientConfigWindow;
 import client.ClientConfigWindowInterface;
 import client.ClientMainWindow;
 import client.ClientMainWindowInterface;
-import server.ServerForumInterface;
 
 public class ConfigWindowController implements ConfigWindowControllerInterface {
 	
-	public ConfigWindowController(ClientConfigWindowInterface configWindow) {
-		this.configWindow = configWindow;
+	public ConfigWindowController() {
+		this.configWindow = new ClientConfigWindow("Tabernac Forum Client");
 		this.configWindow.setVisible(true);
 		
 		this.configWindow.getConnectButton().addActionListener(
@@ -40,9 +38,8 @@ public class ConfigWindowController implements ConfigWindowControllerInterface {
 				boolean clientAdded = serverForum.addClient(pseudo);
 				if(clientAdded) {
 					this.configWindow.setVisible(false);
-					ClientMainWindowInterface window = new ClientMainWindow(serverForum.getChatName());
-					MainWindowControllerInterface windowController = new MainWindowController(window, serverForum, pseudo);
-					windowController.displaySubjectSelection();
+					MainWindowControllerInterface mainWindowController = new MainWindowController(serverForum.getChatName(), serverForum, pseudo);
+					mainWindowController.displaySubjectSelection();
 				}
 				else {
 					configWindow.displayError("Invalid pseudo", "Pseudo " + pseudo + " is already in use");

@@ -43,7 +43,7 @@ public class ClientMainWindow extends JFrame implements ClientMainWindowInterfac
 		mainPanel.add(lblSubject,constr);
 		
 		//Creating JList containing all available subjects
-		subjectListModel = new DefaultListModel();
+		subjectListModel = new DefaultListModel<String>();
 		subjectJList = new JList(subjectListModel);
 		subjectJList.setMinimumSize(new Dimension(100,350));
 		constr.fill = GridBagConstraints.HORIZONTAL;
@@ -96,7 +96,6 @@ public class ClientMainWindow extends JFrame implements ClientMainWindowInterfac
 		Iterator<String> itSub = subjectList.iterator();
 		while(itSub.hasNext()) {
 			subjectListModel.addElement(itSub.next());
-			//System.out.println(itSub.next());
 		}
 		this.subjectJList.setModel(subjectListModel);
 	}
@@ -136,7 +135,7 @@ public class ClientMainWindow extends JFrame implements ClientMainWindowInterfac
 	}
 	
 	private JPanel mainPanel;
-	private DefaultListModel subjectListModel;
+	private DefaultListModel<String> subjectListModel;
 	private JList subjectJList;
 	private JTextField newSubjectField;
 	private JButton majSubjectsButton;

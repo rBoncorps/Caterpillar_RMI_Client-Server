@@ -17,8 +17,8 @@ import server.SubjectInterface;
 
 public class MainWindowController implements MainWindowControllerInterface {
 	
-	public MainWindowController(ClientMainWindowInterface clientMainWindow, ServerForumInterface remoteServer, String pseudo) {
-		this.clientMainWindow = clientMainWindow;
+	public MainWindowController(String forumName, ServerForumInterface remoteServer, String pseudo) {
+		this.clientMainWindow = new ClientMainWindow(forumName);
 		this.clientMainWindow.setVisible(true);
 		this.remoteServer = remoteServer;
 		this.pseudo = pseudo;
