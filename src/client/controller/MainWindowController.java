@@ -3,17 +3,12 @@ package client.controller;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
-import client.ClientConfigWindow;
+import server.ServerForumInterface;
+import server.SubjectInterface;
 import client.ClientMainWindow;
 import client.ClientMainWindowInterface;
 import client.SubjectWindowInterface;
-import server.ServerForumInterface;
-import server.SubjectInterface;
 
 public class MainWindowController implements MainWindowControllerInterface {
 	
@@ -63,7 +58,7 @@ public class MainWindowController implements MainWindowControllerInterface {
 		try {
 			SubjectInterface remoteSubject = remoteServer.getSubject(subjectName);
 			SubjectWindowInterface subjectWindow = clientMainWindow.displaySubjectWindow(subjectName);
-			SubjectWindowControllerInterface subjectWindowController = new SubjectWindowController(subjectWindow, remoteSubject, pseudo);
+			new SubjectWindowController(subjectWindow, remoteSubject, pseudo);
 			displayedSubjects.add(subjectName);
 		}catch(RemoteException e) {
 			clientMainWindow.displayError("Connection lost", "Connection with the server was lost");
