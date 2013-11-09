@@ -4,6 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Collection;
 
+import provider.ProviderInterface;
+
 public interface ServerForumInterface extends Remote {
 
 	public Collection<String> getAvailableSubjects() throws RemoteException;
@@ -15,6 +17,8 @@ public interface ServerForumInterface extends Remote {
 	public void removeClient(String pseudo) throws RemoteException;
 	
 	public boolean addSubject(String newSubjectName) throws RemoteException;
+	
+	public void registerProvider(ProviderInterface provider) throws RemoteException;
 	
 	
 	

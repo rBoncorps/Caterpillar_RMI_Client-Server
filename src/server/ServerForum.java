@@ -4,7 +4,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+
+import provider.ProviderInterface;
 
 public class ServerForum extends UnicastRemoteObject implements
 		ServerForumInterface {
@@ -27,6 +30,7 @@ public class ServerForum extends UnicastRemoteObject implements
 		while(it.hasNext()) {
 			subjects.add(new Subject(it.next()));
 		}
+		subjectProviderMap = new HashMap<String,ProviderInterface>();
 		System.out.println("Server created");
 	}
 	
@@ -43,6 +47,14 @@ public class ServerForum extends UnicastRemoteObject implements
 			if(tmp.getName().equals(title)) {
 				return tmp;
 			}
+		}
+		// Check provided subjects
+		ProviderInterface prov = subjectProviderMap.get(title);
+		if (prov == null) {
+			System.out.println("Error : Subject can't be found on provider");
+		}
+		else {
+			return prov.getSubject();
 		}
 		return null;
 	}
@@ -90,9 +102,16 @@ public class ServerForum extends UnicastRemoteObject implements
 		return true;
 	}
 	
+	public void registerProvider(ProviderInterface provider) throws RemoteException {
+		String subject = provider.getSubjectName();
+		this.subjectNames.add(subject);
+		this.subjectProviderMap.put(subject, provider);
+	}
+	
 	private Collection<String> subjectNames;
 	private Collection<SubjectInterface> subjects;
 	private Collection<String> loggedPseudos;
+	private HashMap<String, ProviderInterface> subjectProviderMap;
 	private String chatName;
 
 }
