@@ -18,7 +18,7 @@ public interface ServerForumInterface extends Remote {
 	
 	public boolean addSubject(String newSubjectName) throws RemoteException;
 	
-	public void registerProvider(ProviderInterface provider) throws RemoteException;
+	public void registerProvider(String providerName) throws RemoteException;
 	
 	
 	

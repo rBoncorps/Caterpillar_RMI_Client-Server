@@ -1,5 +1,8 @@
 package server;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -102,10 +105,16 @@ public class ServerForum extends UnicastRemoteObject implements
 		return true;
 	}
 	
-	public void registerProvider(ProviderInterface provider) throws RemoteException {
-		String subject = provider.getSubjectName();
-		this.subjectNames.add(subject);
-		this.subjectProviderMap.put(subject, provider);
+	public void registerProvider(String providerAdresse) throws RemoteException {
+		try {
+			ProviderInterface provider = (ProviderInterface) Naming.lookup(providerAdresse);
+			String subject = provider.getSubjectName();
+			this.subjectNames.add(subject);
+			this.subjectProviderMap.put(subject, provider);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private Collection<String> subjectNames;

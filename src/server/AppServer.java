@@ -9,8 +9,7 @@ public class AppServer {
 		try {
 			LocateRegistry.createRegistry(8090);
 			ServerForumInterface server = new ServerForum();
-			Naming.bind(
-			"//localhost:8090/server",server);
+			Naming.bind("//localhost:8090/server",server);
 		}
 		catch(Exception e) {
 			System.out.println("Error during Server creation");
